@@ -4,12 +4,14 @@ import db from "./config/connection.js";
 import usersRouter from "./routes/users.js";
 import tasksRouter from "./routes/tasks.js";
 import projectsRouter from "./routes/projects.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({origin: process.env.FRONTEND_URL || 'http://localhost:5173'}));
 app.use(express.json());
 
 app.use("/api/users", usersRouter);
