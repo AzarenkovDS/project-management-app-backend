@@ -21,6 +21,14 @@ const userSchema = new Schema({
   },
 });
 
+// Remove password when converting to JSON
+userSchema.set('toJSON', {
+  transform(doc, ret) {
+    delete ret.password;
+    return ret;
+  }
+});
+
 // hash user password
 userSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
