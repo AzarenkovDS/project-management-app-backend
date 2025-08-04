@@ -15,8 +15,8 @@ app.use(cors({origin: process.env.FRONTEND_URL || 'http://localhost:5173'}));
 app.use(express.json());
 
 app.use("/api/users", usersRouter);
-app.use("/api/projects", tasksRouter);
-app.use("/api", projectsRouter);
+app.use("/api", tasksRouter);
+app.use("/api/projects", projectsRouter);
 
 db.once("open", () => {
   app.listen(PORT, () => console.log(`Now listening on localhost:${PORT}`));
