@@ -20,13 +20,15 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(400).json({ message: "Can't find this user" });
+    console.log("User not found.");
+    return res.status(400).json({ message: "Invalid email or password." });
   }
 
   const correctPw = await user.isCorrectPassword(req.body.password);
 
   if (!correctPw) {
-    return res.status(400).json({ message: "Wrong password!" });
+    console.log("Invalid password.");
+    return res.status(400).json({ message: "Invalid email or password." });
   }
 
   const token = signToken(user);
